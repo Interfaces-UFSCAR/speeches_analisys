@@ -1,0 +1,1 @@
+from speeches_analysis.scrap_discursos.partidos import req_partidos as req_data
