@@ -1,4 +1,4 @@
-import extract_topics.process.preprocess as preprocess
+import preprocess.preprocess as preprocess
 import extract_topics.process.processer as processer
 import spacy
 
