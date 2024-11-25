@@ -1,0 +1,3 @@
+[submodule "src/vendor/pbg"]
+	path = src/vendor/pbg
+	url = git@github.com:matteusgui/PyPBG.git

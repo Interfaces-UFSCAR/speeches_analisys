@@ -1,4 +1,8 @@
 import setuptools
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "vendor" / "pbg"))
 
 setuptools.setup(
     name="speeches_analysis",
