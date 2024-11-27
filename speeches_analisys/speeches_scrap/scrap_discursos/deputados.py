@@ -2,10 +2,10 @@ import requests
 import urllib.parse
 from pydantic_core import from_json
 
-import speeches_scrap.models.deputado as deputado
+from speeches_analisys.speeches_scrap.models import deputado
 
-import speeches_scrap.scrap_discursos.scrap_base as base
-import speeches_scrap.scrap_discursos.discursos as discursos
+from . import scrap_base as base
+from . import discursos
 
 
 def req_deputados(id_partido: int,

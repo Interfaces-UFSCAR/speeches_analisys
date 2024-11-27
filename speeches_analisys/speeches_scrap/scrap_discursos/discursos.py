@@ -2,9 +2,9 @@ import requests
 import urllib.parse
 from pydantic_core import from_json
 
-import speeches_scrap.models.discurso as discurso
+import speeches_analisys.speeches_scrap.models.discurso as discurso
 
-import speeches_scrap.scrap_discursos.scrap_base as base
+from . import scrap_base as base
 
 
 def req_discursos(deputado: int,

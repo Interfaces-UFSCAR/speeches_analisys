@@ -1,9 +1,9 @@
-import extract_topics.models.base_extractor as base_extractor
+import pathlib
 import sklearn.feature_extraction.text as sklearntext
 import sklearn.decomposition as decomposition
 import numpy as np
 import pandas as pd
-import pathlib
+from . import base_extractor
 
 
 class BowLda(base_extractor.Extractor):

@@ -1,12 +1,16 @@
-import requests
+"""
+This module implements the necessary methods to retrieve data based on a party
+"""
+
 import urllib.parse
+import requests
 from pydantic_core import from_json
 from requests.structures import CaseInsensitiveDict
 
-import speeches_scrap.models.partido as partido
+from speeches_analisys.speeches_scrap.models import partido
 
-import speeches_scrap.scrap_discursos.scrap_base as base
-import speeches_scrap.scrap_discursos.deputados as deputados
+from . import scrap_base as base
+from . import deputados
 
 
 def __req_partido(s: requests.Session,

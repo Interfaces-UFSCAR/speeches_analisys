@@ -1,8 +1,8 @@
 import pandas as pd
 
-import speeches_scrap.models.partido as model_partido
-import speeches_scrap.models.deputado as model_deputado
-import speeches_scrap.models.discurso as model_discurso
+from speeches_analisys.speeches_scrap.models import partido as model_partido
+from speeches_analisys.speeches_scrap.models import deputado as model_deputado
+from speeches_analisys.speeches_scrap.models import discurso as model_discurso
 
 
 def to_dataframe(structure: dict[model_partido.Partido,

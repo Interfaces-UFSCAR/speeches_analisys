@@ -1,6 +1,6 @@
-from preprocess import preprocess
-from extract_topics.process import processer
 import spacy
+from speeches_analisys.preprocess import preprocess
+from speeches_analisys.extract_topics.process import processer
 
 
 class Extractor():
@@ -22,12 +22,3 @@ class Extractor():
         treated_discursos = self.processer.process_text(
             allowed_postags=allowed_postags)
         self.treated_discursos = treated_discursos
-
-
-def main():
-    extractor = Extractor([["teste"]])
-    print("Teste")
-
-
-if __name__ == "__main__":
-    main()

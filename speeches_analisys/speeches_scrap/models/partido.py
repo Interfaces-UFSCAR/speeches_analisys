@@ -1,5 +1,5 @@
 from pydantic import Field
-from speeches_scrap.models import baseModel
+from . import baseModel
 
 
 class Partido(baseModel.BaseClass):

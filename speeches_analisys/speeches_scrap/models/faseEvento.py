@@ -1,5 +1,5 @@
 from pydantic import Field
-import speeches_scrap.models.baseModel as baseModel
+from . import baseModel
 
 
 class FaseEvento(baseModel.BaseClass):
