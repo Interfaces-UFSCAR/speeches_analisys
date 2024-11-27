@@ -1,17 +1,22 @@
+[build-system]
+requires = ["setuptools >= 59.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "example_package_matteusgui"
+name = "speeches_analisys"
 version = "0.0.1"
 authors = [
     {name="Matteus Guilherme de Souza", email="matteusgui@hotmail.com"},
 ]
 description = "A analysis tool for the brazilian chmaber of deputies speeches"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 classifiers = [
-    "Programming Language :: Python :: 3"
+    "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies"]
 
 [projects.urls]
 Homepage = "https://github.com/pypa/sampleproject"
