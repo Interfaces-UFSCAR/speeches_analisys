@@ -11,10 +11,10 @@ class Deputado(baseModel.BaseClass):
     uri_partido: str = Field(alias="uriPartido")
     sigla_uf: str = Field(alias="siglaUf")
     id_legislatura: int = Field(alias="idLegislatura")
-    url_foto: str = Field(alias="urlFoto")
-    email: str = Field(alias="email")
+    url_foto: str | None = Field(alias="urlFoto")
+    email: str | None = Field(alias="email")
 
-    def to_list(self) -> list[str | int]:
+    def to_list(self) -> list[str | int | None]:
         return [self.Id,
                 self.uri,
                 self.nome,
