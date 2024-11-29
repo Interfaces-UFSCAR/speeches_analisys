@@ -4,17 +4,17 @@ from . import faseEvento
 
 
 class Discurso(baseModel.BaseClass):
-    data_hora_fim: str = Field(alias="dataHoraFim")
+    data_hora_fim: str | None = Field(alias="dataHoraFim")
     data_hora_inicio: str = Field(alias="dataHoraInicio")
     fase_evento: faseEvento.FaseEvento = Field(alias="faseEvento")
-    keywords: list[str] = Field(alias="keywords")
+    keywords: str = Field(alias="keywords")
     sumario: str = Field(alias="sumario")
     tipo_discurso: str = Field(alias="tipoDiscurso")
     transcricao: str = Field(alias="transcricao")
-    uri_evento: str = Field(alias="uriEvento")
-    url_audio: str = Field(alias="urlAudio")
-    url_texto: str = Field(alias="urlTexto")
-    url_video: str = Field(alias="urlVideo")
+    uri_evento: str | None = Field(alias="uriEvento")
+    url_audio: str | None = Field(alias="urlAudio")
+    url_texto: str | None = Field(alias="urlTexto")
+    url_video: str | None = Field(alias="urlVideo")
 
     def to_list(self):
         return [self.data_hora_fim,

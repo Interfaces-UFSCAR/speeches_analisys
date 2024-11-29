@@ -10,7 +10,7 @@ class Deputado(baseModel.BaseClass):
     sigla_partido: str = Field(alias="siglaPartido")
     uri_partido: str = Field(alias="uriPartido")
     sigla_uf: str = Field(alias="siglaUf")
-    id_legislatura: str = Field(alias="idLegislatura")
+    id_legislatura: int = Field(alias="idLegislatura")
     url_foto: str = Field(alias="urlFoto")
     email: str = Field(alias="email")
 
