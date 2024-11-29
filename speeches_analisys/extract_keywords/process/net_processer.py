@@ -1,6 +1,6 @@
+import string
 import spacy
 from nltk.corpus import stopwords
-import string
 import nltk
 
 
@@ -12,6 +12,7 @@ class NetProcesser():
                  added_stop_words: list[str] | None = None,
                  *args, **kwargs):
         self.nlp: spacy.language.Language
+        nltk.download("stopwords")
         if discursos is not None and discursos != []:
             self.discursos = discursos
         stop_words = set(stopwords.words("portuguese"))

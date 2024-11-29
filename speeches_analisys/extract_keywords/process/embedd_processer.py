@@ -1,4 +1,5 @@
 from nltk.corpus import stopwords
+import nltk
 import re
 
 
@@ -7,8 +8,8 @@ class EmbeddProcesser():
     stop_words: set[str]
 
     def __init__(self, discursos: list[list[str]] | None = None,
-                 added_stop_words: list[str] | None = None,
-                 *args, **kwargs):
+                 added_stop_words: list[str] | None = None):
+        nltk.download("stopwords")
         if discursos is not None and discursos != []:
             self.discursos = discursos
         stop_words = set(stopwords.words("portuguese"))
