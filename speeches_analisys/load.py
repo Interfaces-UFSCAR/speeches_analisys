@@ -2,7 +2,8 @@ import pathlib
 import pandas as pd
 
 
-def load_speeches(speeches_path: pathlib.Path):
+def load_speeches_csv(speeches_path: pathlib.Path) -> tuple[list[str],
+                                                            list[list[str]]]:
     if speeches_path is str:
         speeches_path = pathlib.Path(speeches_path)
     if not speeches_path.exists():
@@ -12,8 +13,8 @@ def load_speeches(speeches_path: pathlib.Path):
     else:
         files = speeches_path.iterdir()
         df_list = [pd.read_csv(file) for file in files]
-    partidos = []
-    discursos = []
+    partidos: list[str] = []
+    discursos: list[list[str]] = []
     for df in df_list:
         partidos.extend(df["sigla"].unique().tolist())
         discursos.append(df["transcricao"].tolist())

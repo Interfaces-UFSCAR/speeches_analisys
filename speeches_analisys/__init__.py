@@ -1,3 +1,5 @@
 from . import extract_topics
 from . import speeches_scrap
-from . import load
+from .load import (
+    load_speeches_csv
+)
