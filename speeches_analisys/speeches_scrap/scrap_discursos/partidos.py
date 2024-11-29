@@ -3,7 +3,6 @@ This module implements the necessary methods to retrieve data based on a party
 """
 
 import urllib.parse
-import json
 import requests
 from pydantic_core import from_json
 from requests.structures import CaseInsensitiveDict
