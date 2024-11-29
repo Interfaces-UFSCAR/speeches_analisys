@@ -2,6 +2,7 @@ import string
 import spacy
 from nltk.corpus import stopwords
 import nltk
+import joblib
 
 
 class Processer():
@@ -24,11 +25,8 @@ class Processer():
         self.stop_words = stop_words
 
     def lemmatization(self, allowed_postags):
-        lemmatized_discursos = [self.__lemmatization(
-            discursos,
-            self.nlp,
-            allowed_postags=allowed_postags
-        ) for discursos in self.discursos]
+        lemmatized_discursos = joblib.Parallel(n_jobs=4)(joblib.delayed(self.__lemmatization)(
+            discursos, self.nlp, allowed_postags) for discursos in self.discursos)
         return lemmatized_discursos
 
     def __lemmatization(self,
