@@ -1,3 +1,4 @@
 from . import (
-    bow_lda
+    bow_lda,
+    tfidf_pbg
 )

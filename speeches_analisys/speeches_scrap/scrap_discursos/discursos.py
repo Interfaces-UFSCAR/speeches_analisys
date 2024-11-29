@@ -4,7 +4,7 @@ from pydantic_core import from_json
 
 import speeches_analisys.speeches_scrap.models.discurso as discurso
 
-from . import scrap_base as base
+from speeches_analisys.speeches_scrap.scrap_discursos import scrap_base as base
 
 
 def req_discursos(deputado: int,
@@ -35,11 +35,9 @@ def req_discursos(deputado: int,
         i += 1
     lista_discursos: list[discurso.Discurso] = []
     for resp in resps:
-        try:
-            lista_discursos.extend(list(
-                map(discurso.Discurso.model_validate_json,
-                    from_json(resp.content)["dados"]))
-                    )
-        except (ValueError, IndexError):
-            pass
+        lista_discursos.extend(list(
+            map(discurso.Discurso.model_validate,
+                from_json(resp.content)["dados"]))
+                )
+
     return lista_discursos

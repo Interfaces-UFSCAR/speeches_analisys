@@ -4,8 +4,8 @@ from pydantic_core import from_json
 
 from speeches_analisys.speeches_scrap.models import deputado
 
-from . import scrap_base as base
-from . import discursos
+from speeches_analisys.speeches_scrap.scrap_discursos import scrap_base as base
+from speeches_analisys.speeches_scrap.scrap_discursos import discursos
 
 
 def req_deputados(id_partido: int,
@@ -28,7 +28,7 @@ def req_deputados(id_partido: int,
 
     response = base.req_url(s=s, url=url)
 
-    lista_deputados = list(map(deputado.Deputado.model_validate_json,
+    lista_deputados = list(map(deputado.Deputado.model_validate,
                                from_json(response.content)["dados"]))
 
     discursos_deputados = {deputado_:

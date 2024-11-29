@@ -3,14 +3,15 @@ This module implements the necessary methods to retrieve data based on a party
 """
 
 import urllib.parse
+import json
 import requests
 from pydantic_core import from_json
 from requests.structures import CaseInsensitiveDict
 
 from speeches_analisys.speeches_scrap.models import partido
 
-from . import scrap_base as base
-from . import deputados
+from speeches_analisys.speeches_scrap.scrap_discursos import scrap_base as base
+from speeches_analisys.speeches_scrap.scrap_discursos import deputados
 
 
 def __req_partido(s: requests.Session,
@@ -24,13 +25,13 @@ def __req_partido(s: requests.Session,
     resps: list[requests.Response] = []
     response = base.req_url(s=s, url=url)
     resps.append(response)
-    while "next" in response.links["next"]["url"]:
+    while "next" in response.links:
         url = response.links["next"]["url"]
         response = base.req_url(s=s, url=url)
         resps.append(response)
     partidos: list[partido.Partido] = []
     for resp in resps:
-        partidos.extend(list(map(partido.Partido.model_validate_json,
+        partidos.extend(list(map(partido.Partido.model_validate,
                                  from_json(resp.content)["dados"])))
     return partidos
 
@@ -63,6 +64,9 @@ def req_partidos(siglas: list[str] | None = None,
         ordenar_por=ordenar_por,
         ordem=ordem
     )
+    params_copy = params.copy()
+    if siglas != []:
+        params["sigla"] = siglas
     query = urllib.parse.urlencode(params, doseq=True)
     url_list.append("?")
     url_list.append(query)
@@ -79,7 +83,7 @@ def req_partidos(siglas: list[str] | None = None,
         __partido: deputados.req_deputados(
             id_partido=__partido.Id,
             s=s,
-            params=params.copy(),
+            params=params_copy,
             ordenar_por=ordenar_por_discursos
         )
         for __partido in partidos
