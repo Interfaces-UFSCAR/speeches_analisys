@@ -23,6 +23,7 @@ class DBAnalyzer():
                  ll_discursos: list[list[str]],
                  partidos: list[str]) -> None:
         nltk.download("stopwords")
+        nltk.download("punkt_tab")
         self.stop_words = set(stopwords.words("portuguese"))
         self.stop_words.update(pathlib.Path("./stop_words.txt")
                                .read_text("utf-8").splitlines())
@@ -134,7 +135,7 @@ class DBAnalyzer():
             for word in words_count:
                 count_word = discurso_split.count(word)
                 words_count[word] += count_word
-        most_common = max(words_count, key=lambda word: word.get)
+        most_common = max(words_count, key=words_count.get)
         return most_common
 
     def calculate(self) -> pd.DataFrame:

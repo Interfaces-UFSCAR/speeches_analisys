@@ -1,8 +1,7 @@
 import string
 import spacy
 from nltk.corpus import stopwords
-import nltk
-import joblib
+from nltk import word_tokenize
 
 
 class Processer():
@@ -25,8 +24,7 @@ class Processer():
         self.stop_words = stop_words
 
     def lemmatization(self, allowed_postags):
-        lemmatized_discursos = joblib.Parallel(n_jobs=4)(joblib.delayed(self.__lemmatization)(
-            discursos, self.nlp, allowed_postags) for discursos in self.discursos)
+        lemmatized_discursos = [self.__lemmatization(discursos, self.nlp, allowed_postags) for discursos in self.discursos]
         return lemmatized_discursos
 
     def __lemmatization(self,
@@ -48,10 +46,11 @@ class Processer():
     def __remove_stop_words_punct(self,
                                   discursos: list[list[str]]) -> list[str]:
         novos_discursos = []
+        punctuation = string.punctuation
         for discurso in discursos:
             novo_discurso = []
             for token in discurso:
-                if ((token not in string.punctuation)
+                if ((token not in punctuation)
                         and (token not in self.stop_words)):
                     novo_discurso.append(token)
                 novo_discurso_str = " ".join(novo_discurso)
@@ -62,14 +61,23 @@ class Processer():
                      allowed_postags: list[str] | None = None
                      ) -> list[list[str]]:
         self.nlp = spacy.load("pt_core_news_lg")
+        print("Modelo carregado")
         lemmatized_discursos = self.lemmatization(allowed_postags)
+        print("Textos lemmatizados")
+        del self.nlp
         discursos_lower = [[discurso.lower()
                             for discurso in discursos]
                            for discursos in lemmatized_discursos]
-        discursos_tokenized = [[nltk.word_tokenize(discurso)
+        print("Textos em lower")
+        del lemmatized_discursos
+        discursos_tokenized = [[word_tokenize(discurso)
                                 for discurso in discursos]
                                for discursos in discursos_lower]
+        print("Textos tokenizados")
+        del discursos_lower
         treated_discursos = [self.__remove_stop_words_punct(
             discursos=discursos)
             for discursos in discursos_tokenized]
+        print("Stopwords removidas")
+        del discursos_tokenized
         return treated_discursos
