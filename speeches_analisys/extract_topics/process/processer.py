@@ -2,6 +2,7 @@ import string
 import spacy
 from nltk.corpus import stopwords
 from nltk import word_tokenize
+from nltk import download
 
 
 class Processer():
@@ -16,6 +17,8 @@ class Processer():
     def __init__(self, discursos: list[list[str]] | None = None,
                  added_stop_words: list[str] | None = None) -> None:
         self.nlp: spacy.language.Language
+        download("stopwords")
+        download("punkt_tab")
         if discursos is not None and discursos != []:
             self.discursos = discursos
         stop_words = set(stopwords.words("portuguese"))
