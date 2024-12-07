@@ -7,8 +7,12 @@ import pbg
 
 
 class TfidfPbg(base_extractor.Extractor):
-    def __init__(self, discursos, partidos, n_components) -> None:
-        super().__init__(discursos, partidos, n_components)
+    def __init__(self,
+                 discursos,
+                 partidos,
+                 n_components,
+                 added_stopwords: list[str] | None = None) -> None:
+        super().__init__(discursos, partidos, n_components, added_stopwords)
         self.vectorizer = sklearntext.TfidfVectorizer()
         self.data_vectorized: list
         self.feature_names: list

@@ -6,7 +6,9 @@ from speeches_analisys.extract_topics.process import processer
 class Extractor():
     discursos: list[list[str]]
 
-    def __init__(self, discursos, partidos, n_components) -> None:
+    def __init__(self, discursos, partidos,
+                 n_components,
+                 added_stopwords: list[str] | None = None) -> None:
         self.discursos = [preprocess.preprocess(discurso)
                           for discurso in discursos]
         self.n_components = n_components
@@ -15,7 +17,7 @@ class Extractor():
         self.treated_discursos: list[list[str]]
         self.nlp: spacy.language.Language
         self.processer = processer.Processer(
-            self.discursos)
+            self.discursos, added_stopwords)
 
     def process_text(self,
                      allowed_postags: list[str] | None = None) -> None:
