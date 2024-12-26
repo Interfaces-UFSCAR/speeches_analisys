@@ -28,6 +28,10 @@ def load_speeches_csv(speeches_path: pathlib.Path) -> tuple[list[str],
 
 def load_topics_csv(topics_path: pathlib.Path) -> pd.DataFrame:
     df = pd.read_csv(topics_path)
+    try:
+        df = df.drop("Unnamed: 0", inplace=False, axis=1)
+    except KeyError:
+        pass
     return df
 
 
