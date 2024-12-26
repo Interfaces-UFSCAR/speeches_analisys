@@ -23,3 +23,8 @@ def load_speeches_csv(speeches_path: pathlib.Path) -> tuple[list[str],
             discursos.append(df["transcricao"].tolist())
 
     return partidos, discursos
+
+
+def load_topics_csv(topics_path: pathlib.Path) -> pd.DataFrame:
+    df = pd.read_csv(topics_path)
+    return df
