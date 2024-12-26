@@ -4,6 +4,8 @@ from nltk.corpus import stopwords
 from nltk import word_tokenize
 from nltk import download
 
+from speeches_analisys.load import load_nlp
+
 
 class Processer():
     """
@@ -63,7 +65,7 @@ class Processer():
     def process_text(self,
                      allowed_postags: list[str] | None = None
                      ) -> list[list[str]]:
-        self.nlp = spacy.load("pt_core_news_lg")
+        self.nlp = load_nlp()
         print("Modelo carregado")
         lemmatized_discursos = self.lemmatization(allowed_postags)
         print("Textos lemmatizados")

@@ -12,6 +12,7 @@ import nltk
 import spacy
 
 from speeches_analisys.preprocess.preprocess import preprocess
+from speeches_analisys.load import load_nlp
 
 
 class DBAnalyzer():
@@ -50,7 +51,7 @@ class DBAnalyzer():
 
     def lemmatization(self):
         '''Makes the lemmatization on the text for all parties.'''
-        nlp = spacy.load("pt_core_news_lg")
+        nlp = load_nlp()
         lemmatized_discursos = [self.__lemmatization(discursos,
                                                      nlp=nlp,
                                                      allowed_postags=None)

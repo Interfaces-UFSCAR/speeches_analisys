@@ -2,6 +2,7 @@ import string
 import spacy
 from nltk.corpus import stopwords
 import nltk
+from speeches_analisys.load import load_nlp
 
 
 class NetProcesser():
@@ -58,7 +59,7 @@ class NetProcesser():
         return texts_out
 
     def process_text(self, allowed_postags: list[str] | None = None) -> list[list[str]]:
-        self.nlp = spacy.load("pt_core_news_lg")
+        self.nlp = load_nlp()
         lemmatized_speeches = self.lemmatization()
         speeches_lower = [[speech.lower() for speech in speeches]
                           for speeches in lemmatized_speeches]

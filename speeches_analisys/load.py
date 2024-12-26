@@ -1,5 +1,6 @@
 import pathlib
 import pandas as pd
+import spacy
 
 
 def load_speeches_csv(speeches_path: pathlib.Path) -> tuple[list[str],
@@ -28,3 +29,13 @@ def load_speeches_csv(speeches_path: pathlib.Path) -> tuple[list[str],
 def load_topics_csv(topics_path: pathlib.Path) -> pd.DataFrame:
     df = pd.read_csv(topics_path)
     return df
+
+
+def load_nlp():
+    try:
+        nlp = spacy.load("pt_core_news_lg")
+    except OSError:
+        from spacy.cli import download
+        download("pt_core_news_lg")
+        nlp = spacy.load("pt_core_news_lg")
+    return nlp
