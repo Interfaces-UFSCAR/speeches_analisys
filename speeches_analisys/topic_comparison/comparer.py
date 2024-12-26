@@ -77,9 +77,9 @@ class Comparer():
         This function calculates all matrix of cosine similarity
         """
         cosine_matrixes = []
-        for topic in self.topics[0]:
+        for topic in self.embeddings[0]:
             topic_matrixes = []
-            for topic2 in self.topics[1]:
+            for topic2 in self.embeddings[1]:
                 topic_matrixes.append(self.calculate_cosine_pair(topic,
                                                                  topic2))
             cosine_matrixes.append(topic_matrixes)
@@ -111,6 +111,7 @@ class Comparer():
             # If the mean of the matrix is greater than the threshold
             # Sets it on the correlated topics
             if mean[highest_index] >= limit:
+                print(mean[highest_index])
                 topic1 = self.topics[0][i]
                 topic2 = self.topics[1][highest_index]
                 correlated_topics.append(tuple([topic1, topic2]))
@@ -127,4 +128,4 @@ class Comparer():
         Filters some not so similar topics."""
         self.extract_embeddings()
         self.calculate_cosine()
-        self.find_similar_topics(limit=threshold)
+        return self.find_similar_topics(limit=threshold)
