@@ -1,0 +1,1 @@
+from speeches_analisys.topic_comparison.comparer import Comparer
