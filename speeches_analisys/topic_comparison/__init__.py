@@ -1,1 +1,2 @@
-from speeches_analisys.topic_comparison.comparer import Comparer
+from .comparer import Comparer
+from .model import SimilarTopic

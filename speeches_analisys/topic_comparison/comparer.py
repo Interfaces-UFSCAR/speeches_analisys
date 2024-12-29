@@ -7,20 +7,22 @@ The class Comparer uses gensim in order to use word embedding \
 import pathlib
 import typing
 import gensim.downloader as api
-from gensim import models
+from gensim import models as gensim_models
 from sklearn.metrics import pairwise
 import numpy as np
+
+from . import model as models
 
 
 class Comparer():
     """
     This class is made to compare different topics in the speeches.
     This class will use word embedding in order to do so"""
-    wv: models.KeyedVectors
+    wv: gensim_models.KeyedVectors
     topics: list[list[list[str]]]
     embeddings: typing.Any
     cosine_matrixes: list
-    correlated_topics: list[tuple[list[str], ...]]
+    correlated_topics: models.SimilarTopic
 
     def __init__(self, topics: list[list[list[str]]]):
         if len(topics) > 2:
@@ -41,8 +43,8 @@ class Comparer():
                             model: pathlib.Path,
                             binary: bool = False):
         """Loads a gensim model from word2vec file"""
-        wv = models.KeyedVectors.load_word2vec_format(model,
-                                                      binary=binary)
+        wv = gensim_models.KeyedVectors.load_word2vec_format(model,
+                                                             binary=binary)
         self.wv = wv
 
     def string_to_vector(self, s: str):
@@ -103,6 +105,7 @@ class Comparer():
         which may be very similar or not.
         """
         correlated_topics = []
+        similarity: list[float | None] = []
         for i, topic_matrixes in enumerate(self.cosine_matrixes):
             # Calculates the mean of the matrix of cosine similarity between the topics
             mean = [np.mean(topic_matrix) for topic_matrix in topic_matrixes]
@@ -111,14 +114,16 @@ class Comparer():
             # If the mean of the matrix is greater than the threshold
             # Sets it on the correlated topics
             if mean[highest_index] >= limit:
-                print(mean[highest_index])
+                similarity.append(mean[highest_index])
                 topic1 = self.topics[0][i]
                 topic2 = self.topics[1][highest_index]
                 correlated_topics.append(tuple([topic1, topic2]))
             else:
+                similarity.append(None)
                 correlated_topics.append(tuple())
-        self.correlated_topics = correlated_topics
-        return correlated_topics
+        self.correlated_topics = models.SimilarTopic(topics=correlated_topics,
+                                                     similarity=similarity)
+        return self.correlated_topics
 
     def calculate(self, threshold: float = 0):
         """Calculates the similarity between topics
