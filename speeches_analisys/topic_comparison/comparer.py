@@ -89,7 +89,7 @@ class Comparer():
 
     def find_similar_topics(self,
                             limit: float = 0
-                            ) -> list[tuple[list[str], ...]]:
+                            ) -> models.SimilarTopic:
         """Calculates the correlated topics.
 
         The function creates a list of tuples which have the most correlated topics.
