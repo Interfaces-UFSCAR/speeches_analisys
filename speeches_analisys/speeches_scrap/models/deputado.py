@@ -1,8 +1,8 @@
 from pydantic import Field
-from . import baseModel
+from . import base_model
 
 
-class Deputado(baseModel.BaseClass):
+class Deputado(base_model.BaseClass):
     '''Represents a deputy'''
     Id: int = Field(alias='id')
     uri: str = Field(alias="uri")

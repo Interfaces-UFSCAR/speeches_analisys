@@ -1,8 +1,8 @@
 from pydantic import Field
-from . import baseModel
+from . import base_model
 
 
-class Partido(baseModel.BaseClass):
+class Partido(base_model.BaseClass):
     """This class represents a party"""
     Id: int = Field(alias="id")
     sigla: str = Field(alias="sigla")
