@@ -4,6 +4,13 @@ from speeches_analisys.extract_topics.process import processer
 
 
 class Extractor():
+    """
+    Base class for the Extraction of the topics.
+
+    This class implements common parts of the __init__ function
+
+    This class also implements the process text function, which is common.
+    """
     discursos: list[list[str]]
 
     def __init__(self, discursos, partidos,
@@ -21,6 +28,7 @@ class Extractor():
 
     def process_text(self,
                      allowed_postags: list[str] | None = None) -> None:
+        """This method process the data in order to create treated speeches"""
         treated_discursos = self.processer.process_text(
             allowed_postags=allowed_postags)
         self.treated_discursos = treated_discursos
