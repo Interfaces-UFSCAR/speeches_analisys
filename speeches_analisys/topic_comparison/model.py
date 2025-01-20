@@ -1,5 +1,6 @@
-import pickle
-import pathlib
+"""
+This module has a class to retain the most similar topics and it's similarities.
+"""
 
 
 class SimilarTopic():
@@ -24,13 +25,14 @@ class SimilarTopic():
             final.append(line)
         return "\n".join(final)
 
-    def calculate_diff_topics(self):
-        diff_topics = set()
-        for topic in self.topics:
-            diff_topics.add(topic[1])
-        num_diff = len(diff_topics)
-        return num_diff
-
-    def to_pickle(self, file: pathlib.Path):
-        with open(file, "wb") as f:
-            pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
+    def __eq__(self, value):
+        for self_topics, self_similarity, value_topics, value_similarity in \
+                zip(self.topics,
+                    self.similarity,
+                    value.topics,
+                    value.similarity):
+            if self_topics != value_topics:
+                return False
+            if self_similarity != value_similarity:
+                return False
+        return True
