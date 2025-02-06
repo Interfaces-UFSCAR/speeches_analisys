@@ -1,12 +1,12 @@
 import pathlib
 import sklearn.feature_extraction.text as sklearntext
 import pandas as pd
-from . import base_extractor
-
 import pbg
+from . import base_extractor
 
 
 class TfidfPbg(base_extractor.Extractor):
+    """Class to extract topics from the speeches using TfIDF and PBG."""
     def __init__(self,
                  discursos,
                  partidos,

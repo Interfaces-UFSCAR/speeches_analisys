@@ -1,6 +1,6 @@
 from . import (
     deputado,
     discurso,
-    faseEvento,
+    fase_evento,
     partido
 )

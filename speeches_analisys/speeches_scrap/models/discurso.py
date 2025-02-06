@@ -1,12 +1,12 @@
 from pydantic import Field
-from . import baseModel
-from . import faseEvento
+from . import base_model
+from .fase_evento import FaseEvento
 
 
-class Discurso(baseModel.BaseClass):
+class Discurso(base_model.BaseClass):
     data_hora_fim: str | None = Field(alias="dataHoraFim")
     data_hora_inicio: str = Field(alias="dataHoraInicio")
-    fase_evento: faseEvento.FaseEvento = Field(alias="faseEvento")
+    fase_evento: FaseEvento = Field(alias="faseEvento")
     keywords: str | None = Field(alias="keywords")
     sumario: str | None = Field(alias="sumario")
     tipo_discurso: str | None = Field(alias="tipoDiscurso")
