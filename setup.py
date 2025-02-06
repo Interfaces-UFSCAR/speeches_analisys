@@ -26,6 +26,7 @@ setuptools.setup(
         "marisa-trie==1.2.1",
         "markdown-it-py==3.0.0",
         "MarkupSafe==3.0.2",
+        "matplotlib==3.10.0",
         "mdurl==0.1.2",
         "murmurhash==1.0.11",
         "nltk==3.9.1",
@@ -61,6 +62,7 @@ setuptools.setup(
         "urllib3==2.2.3",
         "wasabi==1.1.3",
         "weasel==0.4.1",
+        "wordcloud==1.9.4",
         "wrapt==1.17.0",
         "pypbg @ git+https://github.com/matteusgui/PyPBG@master"
     ],
